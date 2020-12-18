@@ -6,12 +6,11 @@ from PyQt5.QtWidgets import *
 #from connect_mysql import *
 import connect_mysql
 from login import *
-from login_proprietor import *
 from change_password import *
-
+from root import *
 
 def switch_window1():#打开业主界面,关闭登入界面
-    ui_proprietor.show()
+    ui_root.show()
     ui_login.hide()
 
 def switch_window2(): #打开修改密码界面，关闭登入界面
@@ -69,29 +68,22 @@ class change_password_Window(QDialog):  # 继承Ui_change_password类
                 print("两次输入的密码不一致")
                 QtWidgets.QMessageBox.critical(ui_change_password, '错误', '两次输入密码不一致')
 
-
-        def incorrect_id_password():    #显示弹窗是否确定要修改密码
-            reply = QtWidgets.QMessageBox.question(ui_change_password, '修改密码', '确定修改密码')
-            if reply == QtWidgets.QMessageBox.Yes:
-                print('yes')
-                test_change_password()
-            else:
-                print('no')
-
         self.change_password.pushButton.clicked.connect(test_change_password)  # 显示确认是否修改密码弹窗
-        #self.change_password.pushButton.clicked.connect(incorrect_id_password) #显示确认是否修改密码弹窗
         self.change_password.pushButton_2.clicked.connect(switch_window3)#从修改界面返回登入界面
 
-class login_proprietor_Window(QDialog):  # 继承Ui_proprirtor类
+
+
+class root_Window(QDialog):  # 继承Ui_root类
     def __init__(self):
         QDialog.__init__(self)
-        self.login_proprietor = Ui_proprietor()
-        self.login_proprietor.setupUi(self)
+        self.root = Ui_root()
+        self.root.setupUi(self)
 
 app = QtWidgets.QApplication(sys.argv)
 ui_login = login_window()
 ui_change_password = change_password_Window()
-ui_proprietor = login_proprietor_Window()
+ui_root = root_Window()
+
 
 ui_login.show()
 sys.exit(app.exec_())
