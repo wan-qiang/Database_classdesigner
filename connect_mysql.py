@@ -2,7 +2,6 @@ import pymysql
 from PyQt5 import *
 import sys
 from PyQt5.QtWidgets import *
-from login_proprietor import *
 from login import *
 conn = pymysql.connect(
     host='localhost',
@@ -54,42 +53,6 @@ def sql_login(a, b):
         return 1
 
 
-
-# def switch_window():#退出主窗口，打开副窗口
-#     ui2.show()
-#     ui1.hide()
-#
-# class first_window(QMainWindow):
-#     def __init__(self):
-#         QMainWindow.__init__(self)
-#         self.first = Ui_login()
-#         self.first.setupUi(self)
-#         def test_login():
-#             text1 = self.first.lineEdit.text()
-#             text2 = self.first.lineEdit_2.text()
-#             x = sql_login(text1, text2)
-#             print(x)
-#             if x == 2:
-#                 switch_window()
-#             else:
-#                 QtWidgets.QMessageBox.critical(ui1, '错误', '用户名或密码错误')
-#
-#         self.first.pushButton.clicked.connect(test_login)
-#         self.first.pushButton_3.clicked.connect(exit)
-#
-# class second_Window(QDialog):
-#     def __init__(self):
-#         QDialog.__init__(self)
-#         self.second = Ui_proprietor()
-#         self.second.setupUi(self)
-#
-#
-# app = QtWidgets.QApplication(sys.argv)
-# ui1 = first_window()
-# ui2 = second_Window()
-# ui1.show()
-# sys.exit(app.exec_())
-# conn.close()
 
 def sql_change_password(a, b, c, d):
     cursor = conn.cursor()
