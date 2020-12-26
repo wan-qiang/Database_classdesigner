@@ -326,20 +326,21 @@ def inquery_user_community():
         communicate_data = ('null', 'null', 'null', 'null', 'null')
     print(communicate_data, x)
     row = x  # 记录行数
-    col = len(communicate_data)  # 记录列数
+    col = len(communicate_data[0])  # 记录列数
     print("行数和列数")
     print(row, col)
     ui_user.user.tableWidget.setRowCount(row)
     ui_user.user.tableWidget.setColumnCount(col)
     for i in range(row):
+        text = communicate_data[i]
         for j in range(col):
             # 临时记录，不能直接插入表格
-            temp_data = communicate_data[j]
+            temp_data = text[j]
             # 转换后可插入表格
             data = QTableWidgetItem(str(temp_data))
             ui_user.user.tableWidget.setItem(i, j, data)
 
-# 业主查询自己信息
+# 业主查询用户信息
 def inquery_user_people():
     global login_data1, login_data2
     communicate_data, x= connect_mysql.sql_query_f_people(login_data1)
@@ -566,19 +567,20 @@ def inquery_root_build():
     row = x  # 记录行数
     if row == 0:
         QMessageBox.information(ui_root_build, '楼栋信息', '未查询到任何楼栋信息')
-    col = len( community_data[0])  # 记录列数
-    print("行数和列数")
-    print(row, col)
-    ui_root_build.build.tableWidget.setRowCount(row)
-    ui_root_build.build.tableWidget.setColumnCount(col)
-    for i in range(row):
-        text = community_data[i]
-        for j in range(col):
-            # 临时记录，不能直接插入表格
-            temp_data = text[j]
-            # 转换后可插入表格
-            data = QTableWidgetItem(str(temp_data))
-            ui_root_build.build.tableWidget.setItem(i, j, data)
+    else:
+        col = len( community_data[0])  # 记录列数
+        print("行数和列数")
+        print(row, col)
+        ui_root_build.build.tableWidget.setRowCount(row)
+        ui_root_build.build.tableWidget.setColumnCount(col)
+        for i in range(row):
+            text = community_data[i]
+            for j in range(col):
+                # 临时记录，不能直接插入表格
+                temp_data = text[j]
+                # 转换后可插入表格
+                data = QTableWidgetItem(str(temp_data))
+                ui_root_build.build.tableWidget.setItem(i, j, data)
 
 #普通管理员通过少量信息查询楼栋信息
 def inquery_root_build_2():
@@ -641,19 +643,20 @@ def inquery_root_parking():
     row = x  # 记录行数
     if row == 0:
         QMessageBox.information(ui_root_parking, '停车位信息', '未查询到任何停车位信息')
-    col = len( community_data[0])  # 记录列数
-    print("行数和列数")
-    print(row, col)
-    ui_root_parking.parking.tableWidget.setRowCount(row)
-    ui_root_parking.parking.tableWidget.setColumnCount(col)
-    for i in range(row):
-        text = community_data[i]
-        for j in range(col):
-            # 临时记录，不能直接插入表格
-            temp_data = text[j]
-            # 转换后可插入表格
-            data = QTableWidgetItem(str(temp_data))
-            ui_root_parking.parking.tableWidget.setItem(i, j, data)
+    else:
+        col = len( community_data[0])  # 记录列数
+        print("行数和列数")
+        print(row, col)
+        ui_root_parking.parking.tableWidget.setRowCount(row)
+        ui_root_parking.parking.tableWidget.setColumnCount(col)
+        for i in range(row):
+            text = community_data[i]
+            for j in range(col):
+                # 临时记录，不能直接插入表格
+                temp_data = text[j]
+                # 转换后可插入表格
+                data = QTableWidgetItem(str(temp_data))
+                ui_root_parking.parking.tableWidget.setItem(i, j, data)
 
 #普通管理员通过少量信息查询停车位信息
 def inquery_root_parking_2():
@@ -704,19 +707,20 @@ def inquery_root_car():
     row = x  # 记录行数
     if row == 0:
         QMessageBox.information(ui_root_car, '停车位信息', '未查询到任何停车位信息')
-    col = len( community_data[0])  # 记录列数
-    print("行数和列数")
-    print(row, col)
-    ui_root_car.car.tableWidget.setRowCount(row)
-    ui_root_car.car.tableWidget.setColumnCount(col)
-    for i in range(row):
-        text = community_data[i]
-        for j in range(col):
-            # 临时记录，不能直接插入表格
-            temp_data = text[j]
-            # 转换后可插入表格
-            data = QTableWidgetItem(str(temp_data))
-            ui_root_car.car.tableWidget.setItem(i, j, data)
+    else:
+        col = len( community_data[0])  # 记录列数
+        print("行数和列数")
+        print(row, col)
+        ui_root_car.car.tableWidget.setRowCount(row)
+        ui_root_car.car.tableWidget.setColumnCount(col)
+        for i in range(row):
+            text = community_data[i]
+            for j in range(col):
+                # 临时记录，不能直接插入表格
+                temp_data = text[j]
+                # 转换后可插入表格
+                data = QTableWidgetItem(str(temp_data))
+                ui_root_car.car.tableWidget.setItem(i, j, data)
 
 #普通管理员通过少量信息查询车辆信息
 def inquery_root_car_2():
@@ -776,19 +780,20 @@ def inquery_root_pet():
     row = x  # 记录行数
     if row == 0:
         QMessageBox.information(ui_root_pet, '宠物信息', '未查询到任何宠物信息')
-    col = len( community_data[0])  # 记录列数
-    print("行数和列数")
-    print(row, col)
-    ui_root_pet.pet.tableWidget.setRowCount(row)
-    ui_root_pet.pet.tableWidget.setColumnCount(col)
-    for i in range(row):
-        text = community_data[i]
-        for j in range(col):
-            # 临时记录，不能直接插入表格
-            temp_data = text[j]
-            # 转换后可插入表格
-            data = QTableWidgetItem(str(temp_data))
-            ui_root_pet.pet.tableWidget.setItem(i, j, data)
+    else:
+        col = len( community_data[0])  # 记录列数
+        print("行数和列数")
+        print(row, col)
+        ui_root_pet.pet.tableWidget.setRowCount(row)
+        ui_root_pet.pet.tableWidget.setColumnCount(col)
+        for i in range(row):
+            text = community_data[i]
+            for j in range(col):
+                # 临时记录，不能直接插入表格
+                temp_data = text[j]
+                # 转换后可插入表格
+                data = QTableWidgetItem(str(temp_data))
+                ui_root_pet.pet.tableWidget.setItem(i, j, data)
 
 #普通管理员通过少量信息查询宠物信息
 def inquery_root_pet_2():
@@ -848,19 +853,20 @@ def inquery_root_staff():
     row = x  # 记录行数
     if row == 0:
         QMessageBox.information(ui_root_staff, '员工信息', '未查询到任何员工信息')
-    col = len( community_data[0])  # 记录列数
-    print("行数和列数")
-    print(row, col)
-    ui_root_staff.staff.tableWidget.setRowCount(row)
-    ui_root_staff.staff.tableWidget.setColumnCount(col)
-    for i in range(row):
-        text = community_data[i]
-        for j in range(col):
-            # 临时记录，不能直接插入表格
-            temp_data = text[j]
-            # 转换后可插入表格
-            data = QTableWidgetItem(str(temp_data))
-            ui_root_staff.staff.tableWidget.setItem(i, j, data)
+    else:
+        col = len( community_data[0])  # 记录列数
+        print("行数和列数")
+        print(row, col)
+        ui_root_staff.staff.tableWidget.setRowCount(row)
+        ui_root_staff.staff.tableWidget.setColumnCount(col)
+        for i in range(row):
+            text = community_data[i]
+            for j in range(col):
+                # 临时记录，不能直接插入表格
+                temp_data = text[j]
+                # 转换后可插入表格
+                data = QTableWidgetItem(str(temp_data))
+                ui_root_staff.staff.tableWidget.setItem(i, j, data)
 
 #普通管理员通过少量信息查询员工信息
 def inquery_root_staff_2():
@@ -929,19 +935,20 @@ def inquery_root_family():
     row = x  # 记录行数
     if row == 0:
         QMessageBox.information(ui_root_family, '家庭信息', '未查询到任何家庭信息')
-    col = len( community_data[0])  # 记录列数
-    print("行数和列数")
-    print(row, col)
-    ui_root_family.family.tableWidget.setRowCount(row)
-    ui_root_family.family.tableWidget.setColumnCount(col)
-    for i in range(row):
-        text = community_data[i]
-        for j in range(col):
-            # 临时记录，不能直接插入表格
-            temp_data = text[j]
-            # 转换后可插入表格
-            data = QTableWidgetItem(str(temp_data))
-            ui_root_family.family.tableWidget.setItem(i, j, data)
+    else:
+        col = len( community_data[0])  # 记录列数
+        print("行数和列数")
+        print(row, col)
+        ui_root_family.family.tableWidget.setRowCount(row)
+        ui_root_family.family.tableWidget.setColumnCount(col)
+        for i in range(row):
+            text = community_data[i]
+            for j in range(col):
+                # 临时记录，不能直接插入表格
+                temp_data = text[j]
+                # 转换后可插入表格
+                data = QTableWidgetItem(str(temp_data))
+                ui_root_family.family.tableWidget.setItem(i, j, data)
 
 #普通管理员通过少量信息查询家庭信息
 def inquery_root_family_2():
@@ -995,6 +1002,120 @@ def inquery_root_family_2():
                     ui_root_family.family.tableWidget.setItem(i, j, data)
     else:
         QMessageBox.critical(ui_root_family, '错误', '未填写任何值')
+
+# 普通管理员查询小区信息
+# def inquery_root_community():
+#     global login_data1, login_data2
+#     communicate_data, x = connect_mysql.sql_query_h_e(login_data1, login_data2)
+#     print(login_data1)
+#     print(communicate_data, x)
+#     row = x  # 记录行数
+#     if row == 0:
+#         QMessageBox.information(ui_root_staff, '小区信息', '未查询到任何小区信息')
+#     else:
+#         col = len(communicate_data[0])  # 记录列数
+#         print("行数和列数")
+#         print(row, col)
+#         ui_root_community.community.tableWidget.setRowCount(row)
+#         ui_root_community.community.tableWidget.setColumnCount(col)
+#         for i in range(row):
+#             for j in range(col):
+#                 # 临时记录，不能直接插入表格
+#                 temp_data = communicate_data[j]
+#                 # 转换后可插入表格
+#                 data = QTableWidgetItem(str(temp_data))
+#                 ui_root_community.community.tableWidget.setItem(i, j, data)
+
+def add_root_house_owner():
+    f_id = ui_root_house_owner.house_owner.lineEdit.text()
+    name = ui_root_house_owner.house_owner.lineEdit_2.text()
+    sex = ui_root_house_owner.house_owner.lineEdit_3.text()
+    age = ui_root_house_owner.house_owner.lineEdit_4.text()
+    id_card = ui_root_house_owner.house_owner.lineEdit_5.text()
+    phone_number = ui_root_house_owner.house_owner.lineEdit_6.text()
+    data = [f_id, name, sex, age, id_card, phone_number]
+
+    if f_id == '':
+        data[0] = -1
+    if name == '':
+        data[1] = -1
+    if sex == '':
+        data[2] = -1
+    if age == '':
+        data[3] = -1
+    if id_card == '':
+        data[4] = -1
+    if phone_number == '':
+        data[5] = -1
+    data1 = tuple(data)
+    print(data1)
+    x = connect_mysql.sql_add_people(data1)
+    print(x)
+    if x == 1:
+        print("成功添加用户")
+    else:
+        print('error')
+
+def delete_root_house_owner():
+    f_id = ui_root_house_owner.house_owner.lineEdit.text()
+    name = ui_root_house_owner.house_owner.lineEdit_2.text()
+    sex = ui_root_house_owner.house_owner.lineEdit_3.text()
+    age = ui_root_house_owner.house_owner.lineEdit_4.text()
+    id_card = ui_root_house_owner.house_owner.lineEdit_5.text()
+    phone_number = ui_root_house_owner.house_owner.lineEdit_6.text()
+    data = [f_id, name, sex, age, id_card, phone_number]
+
+    if f_id == '':
+        data[0] = -1
+    if name == '':
+        data[1] = -1
+    if sex == '':
+        data[2] = -1
+    if age == '':
+        data[3] = -1
+    if id_card == '':
+        data[4] = -1
+    if phone_number == '':
+        data[5] = -1
+    data1 = tuple(data)
+    print(data1)
+    x = connect_mysql.sql_del_people(data1)
+    print(x)
+    if x == 1:
+        print('成功删除用户')
+    else:
+        print('未查询到该用户')
+
+def change_root_house_owner():
+    f_id = ui_root_house_owner.house_owner.lineEdit.text()
+    name = ui_root_house_owner.house_owner.lineEdit_2.text()
+    sex = ui_root_house_owner.house_owner.lineEdit_3.text()
+    age = ui_root_house_owner.house_owner.lineEdit_4.text()
+    id_card = ui_root_house_owner.house_owner.lineEdit_5.text()
+    phone_number = ui_root_house_owner.house_owner.lineEdit_6.text()
+    data = [f_id, name, sex, age, id_card, phone_number]
+
+    if f_id == '':
+        data[0] = -1
+    if name == '':
+        data[1] = -1
+    if sex == '':
+        data[2] = -1
+    if age == '':
+        data[3] = -1
+    if id_card == '':
+        data[4] = -1
+    if phone_number == '':
+        data[5] = -1
+    data1 = tuple(data)
+    print(data1)
+    x = connect_mysql.sql_change_people(data1)
+    if x == 2:
+        print('修改成功')
+    elif x == 1 :
+        print("未找到对应家庭")
+    else:
+        print('不存在该用户')
 
 #继承login类
 class login_window(QMainWindow):
@@ -1116,6 +1237,7 @@ class root_community_window(QMainWindow):
             ui_root_community.show()
 
         self.community.pushButton_1.clicked.connect(shuaxin)
+        #self.community.pushButton_2.clicked.connect(inquery_root_community())
         self.community.pushButton_4.clicked.connect(switch_window27) #  关闭小区信息界面，0表示打开超级管理员界面，1表示打开普通管理员界面
         self.community.pushButton_6.clicked.connect(exit)
 
@@ -1272,7 +1394,10 @@ class root_house_owner_window(QMainWindow):
 
         self.house_owner.pushButton.clicked.connect(inquery_root_house_owner)  #普通管理员查询户主信息
         self.house_owner.pushButton_2.clicked.connect(shuaxin)
-        self.house_owner.pushButton_3.clicked.connect(inquery_root_house_owner_2)  #普通管理员通过少量信息查询户主信息
+        self.house_owner.pushButton_3.clicked.connect(inquery_root_house_owner_2)
+        self.house_owner.pushButton_4.clicked.connect(add_root_house_owner)
+        self.house_owner.pushButton_5.clicked.connect(delete_root_house_owner)
+        self.house_owner.pushButton_6.clicked.connect(change_root_house_owner)  #普通管理员通过少量信息查询户主信息
         self.house_owner.pushButton_7.clicked.connect(switch_window34)  # 关闭业主信息界面，0表示打开超级管理员界面，1表示打开普通管理员界面
         self.house_owner.pushButton_14.clicked.connect(exit)
 
@@ -1338,22 +1463,7 @@ ui_user_car = user_car_Window()
 ui_user_pet = user_pet_Window()
 ui_user_staff = user_staff_Window()
 
-# z = ['f001001', '', '', '', '', '']
-#
-# if z[3]=='':
-#     z[3]= -1
-# if z[2] =='':
-#     z[2] = -1
-# if z[1] == '':
-#     z[1] =-1
-# if z[4] =='':
-#     z[4]=-1
-# if z[5] == '':
-#     z[5]=-1
-# d = tuple(z)
-# print(d)
-# x, y =connect_mysql.sql_query_root_p_search(d, '001')
-# print(x)
+
 
 ui_login.show()
 sys.exit(app.exec_())

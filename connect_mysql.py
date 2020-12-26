@@ -149,6 +149,9 @@ def sql_judge_h_e(a):#参数a为用户名
 
 #查询小区信息
 def sql_query_h_e(a, b):# a = 用户名 , b = 返回的身份。0，1，2对应超级管理员，普通管理员，用户
+    print(1111)
+    print(b)
+    print(1111)
     #查询用户所在小区,h_e_id为小区编号
     query_id0 = "select staff.h_e_id from staff,staff_account_number where " \
                 "staff.id = staff_account_number.staff_id " \
@@ -169,7 +172,7 @@ def sql_query_h_e(a, b):# a = 用户名 , b = 返回的身份。0，1，2对应�
         return -1, -1
     #定义sql查询语句
 
-    sql0 = "select id,h_e_name,h_e_developer,h_e_area,h_e_staff,h_e_adress,h_e_family,h_e_parking,h_e_pet,h_e_building,h_e_car" \
+    sql0 = "select id, h_e_name, h_e_developer, h_e_area, h_e_staff, h_e_adress, h_e_family, h_e_parking, h_e_pet, h_e_building, h_e_car" \
            "from housing_estate;"
     sql1 = "select id,h_e_name,h_e_developer,h_e_area,h_e_staff,h_e_adress,h_e_family,h_e_parking,h_e_pet,h_e_building,h_e_car" \
            "from housing_estate where id = \'" + h_e_id[0] + "\';"
@@ -186,14 +189,15 @@ def sql_query_h_e(a, b):# a = 用户名 , b = 返回的身份。0，1，2对应�
     elif b == 1:
         cursor.execute(sql1)
         row = cursor.execute(sql1)
-        ret = cursor.fetchone()
+        ret = cursor.fetchall()
     #用户
     elif b == 2:
         cursor.execute(sql2)
         row = cursor.execute(sql2)
-        ret = cursor.fetchone()
+        ret = cursor.fetchall()
     conn.commit()
     return ret, row
+
 #用户查看自己的户主信息
 def sql_query_f_people(a):#参数a为用户名
     sql = "select pname,psex,page,pphone,id from people where f_id = \'" + a + "\';"
@@ -221,7 +225,7 @@ def sql_query_f_pet(a):#参数a用户名
 #用户查询车辆信息
 def sql_query_f_car(a):#参数a用户名
     #定义数据库查询语句
-    sql = "select id,color,brand,model from car,family where car.f_id = family.id and family.id = \'" + a + "\';"
+    sql = "select car.id,color,brand,model from car,family where car.f_id = family.id and family.id = \'" + a + "\';"
     cursor.execute(sql)
     row = cursor.execute(sql)
     ret = cursor.fetchall()
@@ -432,7 +436,7 @@ def sql_query_root_family(a):#参数a为小区id
     row = cursor.execute(sql)
     ret = cursor.fetchall()
     conn.commit()
-    return ret,row
+    return ret, row
 
 #管理员根据检索值查看当前小区的家庭信息
 def sql_query_root_family_search(a,b):#参数a为用户输入的索引值，参数b为小区id
@@ -455,3 +459,91 @@ def sql_query_root_family_search(a,b):#参数a为用户输入的索引值，参�
     ret = cursor.fetchall()
     conn.commit()
     return ret, row
+
+
+
+
+#管理员增加户主信息
+def sql_add_people(a):#参数a为用户输入的值，a中，除年龄与电话外，其余均不能为空值，空值用-1表示
+    column = ("people.f_id", "people.pname", "people.psex", "people.page", "people.id", "people.pphone")
+    temp = (a[4], a[0], a[1], a[2], a[3], a[5])
+    sql2 = "select family.id from family,people where people.f_id = family.id and people.f_id = \'" + temp[1] + "\';"
+    cursor.execute(sql2)
+    x = cursor.fetchone()
+    conn.commit()
+    if not x:
+        return 0#找不到对应的家庭
+    sql1 = "insert into people values("
+    for i in temp:
+        if temp.index(i) == 4:
+            if i != -1:
+                sql1 = sql1 + str(i) + ","
+            else:
+                sql1 = sql1 + "null,"
+        elif temp.index(i) == 5:
+            if i != -1:
+                sql1 = sql1 + "\'" + i + "\',"
+            else:
+                sql1 = sql1 + "null,"
+        else:
+            sql1 = sql1 + "\'" + i + "\',"
+    sql1 = sql1[:-1] + ");"
+    cursor.execute(sql1)
+    conn.commit()
+    return 1#成功插入
+
+#管理员删除户主信息
+def sql_del_people(a):#参数a为用户输入的信息,其中身份证号不能为空
+    print(a)
+    column = ("people.f_id", "people.pname", "people.psex", "people.page", "people.id", "people.pphone")
+    sql1 = "select id from people where id = \'" + a[4] + "\';"
+    print(sql1)
+    cursor.execute(sql1)
+    x = cursor.fetchone()
+    if not x:
+        return 0#不存在该用户
+    sql2 = "delete from people where id = \'" + a[4] + "\';"
+    print(sql2)
+    cursor.execute(sql2)
+    conn.commit()
+    return 1 #删除成功
+
+#管理员根据输入的值修改户主信息
+def sql_change_people(a):#参数a为用户输入的值,其中身份证号不能为空
+    column = ("people.f_id", "people.pname", "people.psex", "people.page", "people.id", "people.pphone")
+    sql1 = "select id from people where id = \'" + a[4] + "\';"
+    column1 = (column[4], column[0], column[1], column[2], column[3], column[5])
+    temp = (a[4], a[0], a[1], a[2], a[3], a[5])
+    print(temp)
+    cursor.execute(sql1)
+    x = cursor.fetchone()
+    if not x:
+        return 0  #不存在该用户
+    print(1)
+    if temp[1] != -1:
+        sql2 = "select family.id from family,people where people.f_id = family.id and people.f_id = \'" + temp[1] + "\';"
+        cursor.execute(sql2)
+        x = cursor.fetchone()
+        conn.commit()
+        if not x:
+            return 1  # 找不到对应的家庭
+
+    print(temp)
+    sql3 = "update people set "
+    for i in temp:
+        if i != -1:
+            if temp.index(i) != 0:
+                if temp.index(i) == 4:
+                    sql3 = sql3 + column1[temp.index(i)] + " = " + str(i) + ", "
+                else:
+                    sql3 = sql3 + column1[temp.index(i)] + "= \'" + i + "\', "
+    sql3 = sql3[:-2] + " where id = \'" + temp[0] + "\';"
+    print(sql3)
+    cursor.execute(sql3)
+    conn.commit()
+    return 2 #修改成功
+
+
+
+
+
