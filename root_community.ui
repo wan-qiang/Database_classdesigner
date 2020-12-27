@@ -6,21 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>839</width>
-    <height>711</height>
+    <width>1059</width>
+    <height>848</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>839</width>
-    <height>711</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>839</width>
-    <height>711</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>root_小区信息</string>
@@ -31,7 +19,7 @@
      <rect>
       <x>40</x>
       <y>100</y>
-      <width>751</width>
+      <width>961</width>
       <height>131</height>
      </rect>
     </property>
@@ -97,9 +85,22 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>250</y>
-      <width>191</width>
+      <x>80</x>
+      <y>240</y>
+      <width>231</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入新的小区编号</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>240</y>
+      <width>271</width>
       <height>51</height>
      </rect>
     </property>
@@ -107,51 +108,38 @@
      <string>请输入新的小区名</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>330</y>
-      <width>191</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>请输入新的小区宠物数量</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit_3">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>410</y>
-      <width>191</width>
+      <x>700</x>
+      <y>240</y>
+      <width>271</width>
       <height>51</height>
      </rect>
     </property>
     <property name="placeholderText">
-     <string>请输入新的小区住户数量</string>
+     <string>请输入新的开发商</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_4">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>490</y>
-      <width>191</width>
+      <x>80</x>
+      <y>330</y>
+      <width>231</width>
       <height>51</height>
      </rect>
     </property>
     <property name="placeholderText">
-     <string>请输入新的小区车辆数量</string>
+     <string>请输入新的小区面积</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_5">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>570</y>
-      <width>191</width>
+      <x>360</x>
+      <y>330</y>
+      <width>271</width>
       <height>51</height>
      </rect>
     </property>
@@ -162,10 +150,10 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>400</y>
-      <width>191</width>
-      <height>71</height>
+      <x>570</x>
+      <y>570</y>
+      <width>401</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -178,10 +166,10 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>400</y>
-      <width>201</width>
-      <height>71</height>
+      <x>70</x>
+      <y>680</y>
+      <width>401</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -194,8 +182,8 @@
    <widget class="QPushButton" name="pushButton_6">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>510</y>
+      <x>570</x>
+      <y>680</y>
       <width>401</width>
       <height>81</height>
      </rect>
@@ -226,8 +214,8 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>290</y>
+      <x>70</x>
+      <y>570</y>
       <width>401</width>
       <height>81</height>
      </rect>
@@ -236,7 +224,7 @@
      <string notr="true">font: 18pt &quot;Arial&quot;;</string>
     </property>
     <property name="text">
-     <string>查询</string>
+     <string>全部查询</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_1">
@@ -255,13 +243,91 @@
      <string>刷新</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="lineEdit_6">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>320</y>
+      <width>271</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入新的小区地址</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_7">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>410</y>
+      <width>231</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入新的小区住户数量</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_8">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>410</y>
+      <width>271</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入新的小区停车位数量</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_9">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>410</y>
+      <width>271</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入新的小区宠物数量</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_10">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>490</y>
+      <width>231</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入新的小区楼栋</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_11">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>490</y>
+      <width>251</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入新的小区车辆</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>839</width>
+     <width>1059</width>
      <height>26</height>
     </rect>
    </property>

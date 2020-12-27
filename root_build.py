@@ -142,7 +142,7 @@ class Ui_root_build(object):
         item = self.tableWidget.verticalHeaderItem(7)
         item.setText(_translate("MainWindow", "8"))
         item = self.tableWidget.verticalHeaderItem(8)
-        item.setText(_translate("MainWindow", "新建行"))
+        item.setText(_translate("MainWindow", "9"))
         item = self.tableWidget.verticalHeaderItem(9)
         item.setText(_translate("MainWindow", "10"))
         item = self.tableWidget.horizontalHeaderItem(0)
