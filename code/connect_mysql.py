@@ -254,7 +254,6 @@ def sql_query_f_staff(a):#参数a为小区id
 
 #超级管理员选择小区
 def sql_select_super_root_h_e(a):#参数a为用户输入的值
-    print(a)
     sql1 = "select id from housing_estate where id = \'" + a[0] + "\';"
     cursor.execute(sql1)
     x = cursor.fetchone();
@@ -922,14 +921,19 @@ def sql_add_parking(a, b):#参数a为用户输入的值，其中地址不能为�
     x = cursor.fetchone()
     if x:
         return 0  # 该停车位已经存在
+    print(1)
     sql3 = "insert into parking values("
     for i in temp:
         if temp.index(i) == 0:
             sql3 = sql3 + "\'" + i + "\',"
             sql3 = sql3 + "\'" + b + "\',"
         elif temp.index(i) == 1:
-            sql3 = sql3 + "\'" + i + "\',"
+            if i != -1:
+                sql3 = sql3 + "\'" + i + "\',"
+            else:
+                sql3 = sql3 + "null,"
     sql3 = sql3[:-1] + ");"
+    print(sql3)
     cursor.execute(sql3)
     sql4 = "update housing_estate set h_e_parking = h_e_parking + 1 where id = \'" + b + "\';"
     cursor.execute(sql4)
@@ -978,10 +982,11 @@ def sql_change_parking(a):#参数a为用户输入的值，其中地址不能为�
     cursor.execute(sql1)
     cursor.execute(sql2)
     new_f_id = cursor.fetchone()
-    if old_f_id:
+    print(old_f_id,new_f_id)
+    if old_f_id[0] !=None:
         sql3 = "update family set parking = parking - 1 where id = \'" + old_f_id[0] + "\';"
         cursor.execute(sql3)
-    if new_f_id:
+    if new_f_id[0] != None:
         sql3 = "update family set parking = parking + 1 where id = \'" + new_f_id[0] + "\';"
         cursor.execute(sql3)
     conn.commit()

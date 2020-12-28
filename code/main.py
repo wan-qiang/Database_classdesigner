@@ -94,11 +94,16 @@ def switch_window9():
 # 打开小区查询界面，关闭超级管理员界面
 def switch_window10():
     x = inquery_super_root_community_id()
+    print('ssssss')
+    print(x)
     if x == 1:
         ui_super_root_inquery.show()
         ui_super_root.hide()
-    else:
-        print('error')
+    elif x == 0:
+        QMessageBox.critical(ui_super_root, '错误', '该小区不存在')
+    elif x == -1:
+        QMessageBox.critical(ui_super_root, '错误', '输入值为空，请输入小区编号')
+
 
 # 打开超级管理员界面，关闭小区查询界面
 def switch_window11():
@@ -793,28 +798,6 @@ def inquery_root_build():
 #普通管理员通过少量信息查询楼栋信息
 def inquery_root_build_2():
     global community_id
-    # text1 = ui_root_build.build.lineEdit.text()
-    # text2 = ui_root_build.build.lineEdit_2.text()
-    # text3= ui_root_build.build.lineEdit_3.text()
-    # text4 = ui_root_build.build.lineEdit_4.text()
-    # text5 = ui_root_build.build.lineEdit_5.text()
-    # text6 = ui_root_build.build.lineEdit_6.text()
-    # data = [text1, text2, text3, text4, text5, text6]
-    # print(data)
-    # if text1 == '':
-    #     data[0] = -1
-    # if text2 == '':
-    #     data[1] = -1
-    # if text3 == '':
-    #     data[2] = -1
-    # if text4 == '':
-    #     data[3] = -1
-    # if text5 == '':
-    #     data[4] = -1
-    # if text6 == '':
-    #     data[5] = -1
-    # data1 = tuple(data)
-    # print(data1)
     data1 = gain_root_build_values() #从键盘中获取楼栋信息
     flag = 0
     for index in range(6):
@@ -1090,28 +1073,6 @@ def inquery_root_family():
 #普通管理员通过少量信息查询家庭信息
 def inquery_root_family_2():
     global community_id
-    # text1 = ui_root_family.family.lineEdit_1.text()
-    # text2 = ui_root_family.family.lineEdit_2.text()
-    # text3 = ui_root_family.family.lineEdit_3.text()
-    # text4 = ui_root_family.family.lineEdit_4.text()
-    # text5 = ui_root_family.family.lineEdit_5.text()
-    # text6 = ui_root_family.family.lineEdit_6.text()
-    # data = [text1, text2, text3, text4, text5, text6]
-    # print(data)
-    # if text1 == '':
-    #     data[0] = -1
-    # if text2 == '':
-    #     data[1] = -1
-    # if text3 == '':
-    #     data[2] = -1
-    # if text4 == '':
-    #     data[3] = -1
-    # if text5 == '':
-    #     data[4] = -1
-    # if text6 == '':
-    #     data[5] = -1
-    # data1 = tuple(data)
-    # print(data1)
     data1 = gain_root_family_values() #从键盘中获取家庭信息
     flag = 0
     for index in range(6):
@@ -1250,7 +1211,7 @@ def add_root_parking():
     if flag == 1:
         x = connect_mysql.sql_add_parking(data1, community_id)
         if x == 1:
-            QMessageBox.information(ui_root_parking, '停车位信息', '新的员工停车位信息添加成功')
+            QMessageBox.information(ui_root_parking, '停车位信息', '新的停车位信息添加成功')
         elif x == 0:
             QMessageBox.critical(ui_root_parking, '添加错误', '该停车位已经存在')
         else:
@@ -1461,7 +1422,7 @@ def change_root_parking():
     data1 = gain_root_parking_values()  # 从键盘中获取员工信息值
     if data1[1] != -1:
         x = connect_mysql.sql_change_parking(data1)
-        if x == 2:
+        if x == 1:
             QMessageBox.information(ui_root_parking, '停车位信息', '停车位信息修改成功')
         elif x == 0:
             QMessageBox.critical(ui_root_parking, '修改错误', '该停车位不存在')
@@ -1554,14 +1515,21 @@ def change_root_community():
 def inquery_super_root_community_id():
     global community_id
     text = ui_super_root.super_root.lineEdit.text()
-    text1 = (text,)
-    x = connect_mysql.sql_select_super_root_h_e(text1)
-    print(x)
-    if x == 0:
-       QMessageBox.critical(ui_super_root, '错误', '该小区不存在')
+    if text == '':
+        text = -1
+    if text != -1:
+        text1 = (text,)
+        x = connect_mysql.sql_select_super_root_h_e(text1)
+        print(x)
+        if x == 0:
+            return 0
+        else:
+            community_id = x
+            print(community_id)
+            return 1
     else:
-        community_id = x
-        return 1
+        return -1
+
 
 #查询添加小区页面中所有小区信息
 def inquery_super_root_add_community():
@@ -1658,7 +1626,7 @@ def add_super_root_community():
 #删除小区
 def delete_super_root_community():
     global community_id
-    x = inquery_super_root_community_id()
+    x = inquery_super_root_community_id() #查询小区id是否正确
     if x == 1:
         community_id1 = (community_id,)
         y = connect_mysql.sql_del_super_root_h_e(community_id1)
@@ -1667,10 +1635,14 @@ def delete_super_root_community():
             ui_super_root.show()
             inquery_super_root_commmunity()
             QMessageBox.information(ui_root_community, '小区信息', '删除小区成功')
-        else:
-            QMessageBox.critical(ui_root_community, '小区信息', '删除小区失败')
-    else:
-        QMessageBox.critical(ui_root_community, '小区信息', '小区编号错误')
+        elif y == 0:
+            QMessageBox.critical(ui_root_community, '删除小区', '小区编号错误，请重新输入')
+    elif x == 0:
+        QMessageBox.critical(ui_root_community, '删除小区', '该小区不存在')
+    elif x == -1:
+        QMessageBox.critical(ui_super_root, '删除错误', '输入值为空，请输入小区编号')
+
+
 
 
 #继承login类
@@ -1758,7 +1730,6 @@ class super_root_add_community_Window(QMainWindow):
         self.super_root_add_community.pushButton_4.clicked.connect(switch_window12)  # 打开超级管理员界面 ，关闭添加小区界面
         self.super_root_add_community.pushButton_6.clicked.connect(exit)
         self.super_root_add_community.pushButton_7.clicked.connect(add_super_root_community)
-
 
 
 
@@ -1978,6 +1949,7 @@ class root_house_owner_window(QMainWindow):
         self.house_owner.pushButton_6.clicked.connect(change_root_house_owner)  #普通管理员通过少量信息查询户主信息
         self.house_owner.pushButton_7.clicked.connect(switch_window34)  # 关闭业主信息界面，0表示打开超级管理员界面，1表示打开普通管理员界面
         self.house_owner.pushButton_14.clicked.connect(exit)
+
 
 # 继承Ui_user类
 class user_Window(QDialog):
