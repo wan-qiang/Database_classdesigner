@@ -1498,14 +1498,19 @@ def change_root_community():
         data[10] = -1
     data1 = tuple(data)
     print(data1)
+
     if data1[0] != -1:
-        x = connect_mysql.sql_change_housing_estate(data1)
-        if x == 1:
-            QMessageBox.information(ui_root_community, '小区信息', '小区信息修改成功')
+        if data1[4] != -1 or data1[6] != -1 or data1[7] != -1 or data1[8] != -1 or data1[9] != -1 or data1[10] != -1:
+            QMessageBox.critical(ui_root_community, '小区信息', '只支持在确定小区编号的情况下修改小区名，小区开发商，小区面积，小区地址')
         else:
-            QMessageBox.critical(ui_root_community, '小区信息', '修改错误')
+            x = connect_mysql.sql_change_housing_estate(data1)
+            if x == 1:
+                QMessageBox.information(ui_root_community, '小区信息', '小区信息修改成功')
+            else:
+                QMessageBox.critical(ui_root_community, '小区信息', '修改错误')
     else:
         QMessageBox.critical(ui_root_community, '修改错误', '小区编号不能为空，请重新输入')
+
 
 
 
@@ -1616,12 +1621,21 @@ def add_super_root_community():
         data[10] = -1
     data1 = tuple(data)
     print(data1)
-    x = connect_mysql.sql_add_super_root_h_e(data1)
-    print(x)
-    if x == 1:
-        QMessageBox.information(ui_root_community, '小区信息', '新小区添加成功')
+    flag = 0
+    if data1[0] != -1 and data1[1] != -1 and data1[2] != -1 and data1[3] != -1 and data1[5] != -1:
+        flag = 1
+    if flag == 1:
+        x = connect_mysql.sql_add_super_root_h_e(data1)
+        print(x)
+        if x == 1:
+            QMessageBox.information(ui_root_community, '小区信息', '新小区添加成功')
+        else:
+            QMessageBox.critical(ui_root_community, '小区信息', '添加小区失败')
     else:
-        QMessageBox.critical(ui_root_community, '错误', '添加小区失败')
+        QMessageBox.critical(ui_root_community, '错误', '不允许小区编号、小区地址、小区开发商、小区名、小区面积等值为空')
+
+#小区编号，小区地址，小区开发商，小区名，小区面积不能为空值，小区员工数量，
+#小区家庭数量，小区停车场数量，小区宠物数量，小区楼栋数量，小区车辆数量均默认为零且增加时不支持赋值
 
 #删除小区
 def delete_super_root_community():
